@@ -28,13 +28,20 @@ function App() {
 
   return (
     // <React.Fragment> Since we use Auhcontext with 'Provider' we don't need react fragment anymore
-    // With the 'Provider' context can wrap jsx code and all of the components child can access
+    // With the 'Provider' context can wrap jsx code and all of the components child can accesss
+    // We can pass functions to make context dynamic
 
-    <AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
-      <MainHeader onLogout={logoutHandler} />
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+        onLogout: logoutHandler, //function
+        onLogin: loginHandler, //function
+      }}
+    >
+      <MainHeader />
       <main>
-        {!isLoggedIn && <Login onLogin={loginHandler} />}
-        {isLoggedIn && <Home onLogout={logoutHandler} />}
+        {!isLoggedIn && <Login />}
+        {isLoggedIn && <Home />}
       </main>
     </AuthContext.Provider>
   );
